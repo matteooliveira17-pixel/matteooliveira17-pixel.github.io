@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254"><style>.r-band{fill:url(#g);fill-rule:evenodd;stroke:#0b0c0e;stroke-width:11;stroke-linejoin:round}.r-comet{fill:none;stroke:#fffbe6;stroke-width:80;stroke-linecap:round;stroke-dasharray:6 94;opacity:.8;animation:o 2.4s linear infinite}.back .r-comet{opacity:.35}@keyframes o{to{stroke-dashoffset:-100}}@media (prefers-reduced-motion:reduce){.r-comet{animation:none;opacity:0}}</style>
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd84a"/><stop offset="1" stop-color="#ffb300"/></linearGradient>
+        <clipPath id="spBack"><rect x="-720" y="-420" width="1440" height="420"/></clipPath>
+        <clipPath id="spFront"><rect x="-720" y="0" width="1440" height="420"/></clipPath>
+        <clipPath id="spBand"><path clip-rule="evenodd" d="M-590 0A590 175 0 1 0 590 0A590 175 0 1 0-590 0ZM-522-25A522 140 0 1 0 522-25A522 140 0 1 0-522-25Z"/></clipPath>
+        <linearGradient id="spFadeG" gradientUnits="userSpaceOnUse" x1="-600" y1="0" x2="600" y2="0"><stop offset="0" stop-color="#fff"/><stop offset=".22" stop-color="#fff" stop-opacity=".2"/><stop offset=".5" stop-color="#fff" stop-opacity=".05"/><stop offset=".78" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff"/></linearGradient>
+        <mask id="spFade" maskUnits="userSpaceOnUse" x="-720" y="-420" width="1440" height="840"><rect x="-720" y="-420" width="1440" height="840" fill="url(#spFadeG)"/></mask>
+      </defs>
+      <g transform="translate(627 640) rotate(-24)">
+        <g class="sp-ring back" clip-path="url(#spBack)"><g mask="url(#spFade)">
+          <path class="r-band" d="M-590 0A590 175 0 1 0 590 0A590 175 0 1 0-590 0ZM-522-25A522 140 0 1 0 522-25A522 140 0 1 0-522-25Z"/>
+          <g clip-path="url(#spBand)"><path class="r-comet" pathLength="100" d="M-556-12A556 158 0 1 0 556-12A556 158 0 1 0-556-12"/></g>
+        </g></g>
+      </g>
+      <g class="sp-m">
+        <polygon fill="#fff" points="257,320 708,632 593,703 388,553 388,778 257,850"/>
+        <polygon fill="url(#g)" points="612,567 997,310 997,452 708,632"/>
+        <path fill="url(#g)" fill-rule="evenodd" d="M795 615L997 495V938H795ZM916 577H997V600H916ZM925 646H997V668H925ZM889 714H997V737H889ZM925 782H997V805H925ZM889 850H997V873H889Z"/>
+      </g>
+      <g transform="translate(627 640) rotate(-24)">
+        <g class="sp-ring front" clip-path="url(#spFront)">
+          <path class="r-band" d="M-590 0A590 175 0 1 0 590 0A590 175 0 1 0-590 0ZM-522-25A522 140 0 1 0 522-25A522 140 0 1 0-522-25Z"/>
+          <g clip-path="url(#spBand)"><path class="r-comet" pathLength="100" d="M-556-12A556 158 0 1 0 556-12A556 158 0 1 0-556-12"/></g>
+        </g>
+      </g>
+</svg>
