@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Métrix — logiciel de métré sur plans, gratuit</title>
+<meta name="description" content="Métrix : mesurez surfaces, longueurs et quantités sur vos plans PDF, calculez vos ouvrages et lisez vos maquettes Revit. Gratuit, sans inscription, pour Mac, Windows, iPhone et iPad.">
+<meta property="og:title" content="Métrix — logiciel de métré sur plans, gratuit">
+<meta property="og:description" content="Surfaces, longueurs, compteurs, ouvrages, maquettes Revit en 3D, export Excel. Gratuit, sans inscription. Mac, Windows, iPhone et iPad.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/metres.jpg">
+<link rel="icon" href="img/icone.png">
+<link rel="apple-touch-icon" href="img/icone.png">
+<style>
+  :root { --gold:#ffc21a; --gold2:#ffb300; --ink:#15181d; --ink2:#22262d; --txt:#1d2430; --muted:#5b6575; --line:#e3e7ee; --bg:#f6f7f9; --blue:#2b579a; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--txt); background:#fff; -webkit-font-smoothing:antialiased; }
+  a { color:var(--blue); }
+  img { max-width:100%; height:auto; display:block; }
+  .wrap { max-width:1160px; margin:0 auto; padding:0 24px; }
+
+  /* barre du haut */
+  header.top { position:sticky; top:0; z-index:10; background:rgba(21,24,29,.92); backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid rgba(255,255,255,.06); }
+  header.top .wrap { display:flex; align-items:center; gap:24px; height:62px; }
+  .brand { display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none; font-weight:700; font-size:20px; letter-spacing:.3px; }
+  .brand img { width:40px; height:40px; }
+  header.top nav { margin-left:auto; display:flex; gap:22px; }
+  header.top nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:15px; }
+  header.top nav a:hover { color:#fff; }
+  header.top .cta { padding:8px 16px; border-radius:8px; background:var(--gold); color:#1a1300; font-weight:700; text-decoration:none; font-size:14.5px; }
+  header.top .cta:hover { background:#ffd24d; }
+
+  /* en-tête */
+  .hero { background:radial-gradient(circle at 70% 30%, #2c323c 0%, #15181d 55%, #0b0d10 100%); color:#fff; padding:72px 0 0; overflow:hidden; }
+  .hero .wrap { display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; }
+  .hero h1 { font-size:50px; line-height:1.08; margin:0 0 18px; letter-spacing:-.5px; }
+  .hero h1 em { font-style:normal; color:var(--gold); }
+  .hero p.lead { font-size:19px; color:rgba(255,255,255,.78); margin:0 0 28px; max-width:540px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px 18px; margin:22px 0 0; padding:0; list-style:none; color:rgba(255,255,255,.7); font-size:14.5px; }
+  .badges li::before { content:"✓"; color:var(--gold); font-weight:700; margin-right:7px; }
+  .hero-logo { justify-self:center; width:min(380px, 80%); filter:drop-shadow(0 20px 40px rgba(0,0,0,.45)); }
+  .hero-shot { grid-column:1 / -1; margin-top:56px; border-radius:14px 14px 0 0; overflow:hidden; box-shadow:0 -10px 60px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.08); border-bottom:0; }
+
+  .btns { display:flex; flex-wrap:wrap; gap:12px; }
+  .btn { display:inline-flex; align-items:center; gap:10px; padding:13px 20px; border-radius:10px; font-weight:700; font-size:16px; text-decoration:none; border:2px solid transparent; transition:transform .12s, background .12s; }
+  .btn:hover { transform:translateY(-1px); }
+  .btn svg { width:20px; height:20px; flex:none; }
+  .btn.gold { background:var(--gold); color:#1a1300; }
+  .btn.gold:hover { background:#ffd24d; }
+  .btn.ghost { color:#fff; border-color:rgba(255,255,255,.28); }
+  .btn.ghost:hover { background:rgba(255,255,255,.08); }
+  .btn.light { background:#fff; color:var(--txt); border-color:var(--line); }
+  .btn.light:hover { border-color:#c9d0db; }
+  .btn small { display:block; font-weight:500; font-size:12px; opacity:.75; }
+  .btn .l { display:flex; flex-direction:column; line-height:1.25; text-align:left; }
+  .btn.mine { box-shadow:0 0 0 4px rgba(255,194,26,.35); }
+
+  section { padding:84px 0; }
+  section.alt { background:var(--bg); }
+  h2 { font-size:34px; line-height:1.15; margin:0 0 12px; letter-spacing:-.3px; }
+  .intro { color:var(--muted); font-size:18px; max-width:720px; margin:0 0 44px; }
+
+  /* fonctions */
+  .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; }
+  .card .ic { width:44px; height:44px; border-radius:11px; display:grid; place-items:center; background:#fff6db; color:#a86b00; margin-bottom:14px; }
+  .card .ic svg { width:24px; height:24px; }
+  .card h3 { margin:0 0 6px; font-size:18px; }
+  .card p { margin:0; color:var(--muted); font-size:15px; }
+
+  /* captures */
+  .shot { display:grid; grid-template-columns:1fr 1.35fr; gap:44px; align-items:center; margin-bottom:72px; }
+  .shot:last-child { margin-bottom:0; }
+  .shot.rev { grid-template-columns:1.35fr 1fr; }
+  .shot.rev .txt { order:2; }
+  .shot h3 { font-size:24px; margin:0 0 10px; }
+  .shot p { color:var(--muted); margin:0 0 12px; }
+  .shot ul { margin:0; padding-left:20px; color:var(--muted); }
+  .shot figure { margin:0; border-radius:12px; overflow:hidden; border:1px solid var(--line); box-shadow:0 18px 50px rgba(20,30,50,.14); }
+
+  /* téléchargement */
+  .dl { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  .dl .card { display:flex; flex-direction:column; }
+  .dl .card h3 { display:flex; align-items:center; gap:10px; font-size:20px; }
+  .dl .card h3 svg { width:26px; height:26px; }
+  .dl .card p { flex:1; margin-bottom:18px; }
+  .dl .card .btn { justify-content:center; }
+  .dl .card.mine { border-color:var(--gold); box-shadow:0 0 0 3px rgba(255,194,26,.25); }
+  .ver { margin:22px 0 0; color:var(--muted); font-size:14.5px; }
+
+  /* installation */
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .steps ol { margin:0; padding-left:22px; }
+  .steps li { margin:0 0 10px; color:#3a4352; }
+  .steps li b { color:var(--txt); }
+  .note { margin-top:20px; padding:16px 18px; border-radius:12px; background:#fff8e1; border:1px solid #f3dc94; color:#5b4a12; font-size:15px; }
+
+  /* questions */
+  details { background:#fff; border:1px solid var(--line); border-radius:12px; padding:0 20px; margin-bottom:10px; }
+  details summary { cursor:pointer; padding:16px 0; font-weight:600; list-style:none; display:flex; justify-content:space-between; gap:16px; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::after { content:"+"; color:var(--muted); font-size:22px; line-height:1; }
+  details[open] summary::after { content:"−"; }
+  details p { margin:0 0 16px; color:var(--muted); }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.6); padding:36px 0; font-size:14px; }
+  footer .wrap { display:flex; flex-wrap:wrap; gap:12px 28px; align-items:center; }
+  footer .brand { font-size:16px; }
+  footer .brand img { width:30px; height:30px; }
+  footer a { color:rgba(255,255,255,.8); }
+
+  @media (max-width:900px) {
+    .hero .wrap { grid-template-columns:1fr; }
+    .hero h1 { font-size:38px; }
+    .hero-logo { order:-1; width:180px; }
+    .grid, .dl, .steps { grid-template-columns:1fr; }
+    .shot, .shot.rev { grid-template-columns:1fr; gap:22px; }
+    .shot.rev .txt { order:0; }
+    header.top nav { display:none; }
+    header.top .cta { margin-left:auto; }
+    section { padding:60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="img/logo.svg" alt="">Métrix</a>
+    <nav>
+      <a href="#fonctions">Fonctions</a>
+      <a href="#apercu">Aperçu</a>
+      <a href="#installation">Installation</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <a class="cta" href="#telecharger">Télécharger</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Le métré sur plan,<br><em>simple et rapide.</em></h1>
+      <p class="lead">Mesurez surfaces, longueurs et quantités directement sur vos plans PDF, calculez béton, coffrage et aciers, et lisez vos maquettes Revit en 3D. Gratuit, sans inscription.</p>
+      <div class="btns">
+        <a class="btn gold" href="#telecharger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>Télécharger gratuitement</a>
+        <a class="btn ghost" href="https://matteooliveira17-pixel.github.io/metrix/" target="_blank" rel="noopener">Essayer en ligne</a>
+      </div>
+      <ul class="badges">
+        <li>Mac et Windows</li><li>iPhone et iPad</li><li>Fonctionne sans internet</li><li>Vos plans restent chez vous</li>
+      </ul>
+    </div>
+    <img class="hero-logo" src="img/logo.svg" alt="Logo Métrix">
+    <img class="hero-shot" src="img/metres.jpg" alt="Métrix : surfaces, longueurs et compteurs mesurés sur un plan d'appartement" width="1600" height="1000">
+  </div>
+</div>
+
+<section id="fonctions">
+  <div class="wrap">
+    <h2>Tout ce qu'il faut pour métrer un plan</h2>
+    <p class="intro">Pensé pour les conducteurs de travaux, métreurs et économistes : rapide sur chantier comme au bureau.</p>
+    <div class="grid">
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h11l5 5v9H4z"/><path d="M8 13h8M8 16h5"/></svg></div>
+        <h3>Plans PDF et images</h3><p>Ouvrez vos plans PDF (plusieurs pages), JPG ou PNG. L'échelle écrite sur le plan est détectée automatiquement.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></div>
+        <h3>Surfaces, longueurs, compteurs</h3><p>Polygones, rectangles, cercles, arcs, main levée, compteurs. Vides à déduire, multiplicateurs, regroupement par catégorie.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 20h18M5 20V10l7-5 7 5v10"/><path d="M10 20v-6h4v6"/></svg></div>
+        <h3>Ouvrages calculés</h3><p>Associez un métré à un ouvrage (voile, dalle, poutre, semelle…) : béton, coffrage et aciers sont calculés avec vos propres formules.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg></div>
+        <h3>Maquettes Revit en 3D</h3><p>Ouvrez un IFC exporté de Revit (ou un .rvt avec le convertisseur gratuit DDC) : quantités par catégorie, vue en plan et 3D aux couleurs de Revit.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="m9 11 6 6m0-6-6 6"/></svg></div>
+        <h3>Export Excel</h3><p>Exportez tous vos métrés et les quantités de vos maquettes dans un classeur Excel prêt à l'emploi.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg></div>
+        <h3>Mises à jour automatiques</h3><p>Les nouvelles versions s'installent toutes seules au lancement. Rien à retélécharger.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="apercu" class="alt">
+  <div class="wrap">
+    <h2>Aperçu</h2>
+    <p class="intro">Une interface claire, à onglets, comme les logiciels que vous connaissez déjà.</p>
+    <div class="shot">
+      <div class="txt">
+        <h3>Métrer un plan en quelques clics</h3>
+        <p>Réglez l'échelle, choisissez l'outil, cliquez les sommets : la surface, le périmètre et les vides déduits s'affichent aussitôt.</p>
+        <ul><li>Plusieurs plans ouverts en onglets</li><li>Annuler / rétablir, aimantation, mode orthogonal</li><li>Récapitulatif par groupe en temps réel</li></ul>
+      </div>
+      <figure><img src="img/metres.jpg" alt="Métrés sur un plan" loading="lazy" width="1600" height="1000"></figure>
+    </div>
+    <div class="shot rev">
+      <figure><img src="img/ouvrages.jpg" alt="Bibliothèque d'ouvrages" loading="lazy" width="1600" height="1000"></figure>
+      <div class="txt">
+        <h3>Vos ouvrages, vos formules</h3>
+        <p>Une bibliothèque d'ouvrages types (voiles, dalles, poutres, poteaux, semelles) à adapter : épaisseur, hauteur, ratio d'aciers…</p>
+        <ul><li>Formules simples : L × H × ep</li><li>Quantités recalculées dès que le métré change</li></ul>
+      </div>
+    </div>
+    <div class="shot">
+      <div class="txt">
+        <h3>Maquettes Revit / IFC</h3>
+        <p>Tous les éléments de la maquette, classés par catégorie et désignation, avec leurs quantités. Vue en plan niveau par niveau ou vue 3D.</p>
+        <ul><li>Filtre par niveau et recherche</li><li>Comparaison de deux IFC</li><li>Export Excel de tous les métrés</li></ul>
+      </div>
+      <figure><img src="img/revit-3d.jpg" alt="Maquette IFC en 3D" loading="lazy" width="1600" height="955"></figure>
+    </div>
+  </div>
+</section>
+
+<section id="telecharger">
+  <div class="wrap">
+    <h2>Télécharger Métrix</h2>
+    <p class="intro">Gratuit, sans inscription et sans publicité.</p>
+    <div class="dl">
+      <div class="card" data-os="mac">
+        <h3><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8C6.9 7.3 5.5 8.2 4.7 9.6c-1.6 2.8-.4 6.9 1.2 9.1.8 1.1 1.7 2.3 2.9 2.3 1.2-.1 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.6zM14.1 5.6c.6-.8 1.1-1.8 1-2.9-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2.1-.5 2.7-1.3z"/></svg>Mac</h3>
+        <p>macOS 12 (Monterey) ou plus récent, Mac Intel et Apple Silicon (M1 à M4).</p>
+        <a class="btn gold" href="telecharger/Metrix-Mac.zip" download><span class="l">Télécharger pour Mac<small>Metrix-Mac.zip · 3,8 Mo</small></span></a>
+      </div>
+      <div class="card" data-os="win">
+        <h3><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10 4.5v7H3zM11 4.4 21 3v8.5H11zM3 12.5h7v7l-7-1zM11 12.5h10V21l-10-1.4z"/></svg>Windows</h3>
+        <p>Windows 10 ou 11. Utilise Microsoft Edge (déjà installé) ou Google Chrome.</p>
+        <a class="btn gold" href="telecharger/Metrix-Windows.zip" download><span class="l">Télécharger pour Windows<small>Metrix-Windows.zip · 3,4 Mo</small></span></a>
+      </div>
+      <div class="card" data-os="mobile">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>iPhone, iPad, navigateur</h3>
+        <p>Version web : ouvrez-la dans Safari puis « Partager → Sur l'écran d'accueil » pour l'utiliser comme une app.</p>
+        <a class="btn light" href="https://matteooliveira17-pixel.github.io/metrix/" target="_blank" rel="noopener"><span class="l">Ouvrir la version web<small>Rien à installer</small></span></a>
+      </div>
+    </div>
+    <p class="ver">Version actuelle : <b>3.16</b> du 19 novembre 2026. Guides illustrés : <a href="telecharger/Guide-Metrix-Mac.pdf">Mac (PDF)</a> · <a href="telecharger/Guide-Metrix-Windows.pdf">Windows (PDF)</a></p>
+  </div>
+</section>
+
+<section id="installation" class="alt">
+  <div class="wrap">
+    <h2>Installation</h2>
+    <p class="intro">Métrix n'est pas distribué par l'App Store ni le Microsoft Store : au premier lancement, votre ordinateur demande une confirmation. C'est normal et à faire une seule fois.</p>
+    <div class="steps">
+      <div class="card">
+        <h3>Sur Mac</h3>
+        <ol>
+          <li>Double-cliquez sur <b>Metrix-Mac.zip</b> pour le décompresser.</li>
+          <li>Glissez <b>Métrix</b> dans le dossier <b>Applications</b>.</li>
+          <li>Ouvrez Métrix. Si le Mac indique qu'il ne peut pas vérifier l'application : cliquez sur <b>OK</b>, ouvrez <b>Réglages Système → Confidentialité et sécurité</b>, puis tout en bas <b>Ouvrir quand même</b>.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Sur Windows</h3>
+        <ol>
+          <li>Avant d'extraire : clic droit sur <b>Metrix-Windows.zip</b> → <b>Propriétés</b> → cochez <b>Débloquer</b> → <b>OK</b>.</li>
+          <li>Clic droit sur le zip → <b>Extraire tout…</b>, dans Documents par exemple.</li>
+          <li>Dans le dossier Metrix, double-cliquez sur <b>Installer les raccourcis</b>, puis lancez Métrix depuis le Bureau.</li>
+          <li>Si Windows affiche « Windows a protégé votre ordinateur » : <b>Informations complémentaires → Exécuter quand même</b>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="note"><b>Fichiers Revit (.rvt) :</b> Métrix lit directement les fichiers IFC exportés de Revit. Pour ouvrir un fichier .rvt, installez en plus le convertisseur <b>DDC</b> depuis le site officiel de son éditeur (gratuit pour un usage non commercial ; une licence DDC est nécessaire pour un usage professionnel). Les guides PDF expliquent son installation.</div>
+  </div>
+</section>
+
+<section id="questions">
+  <div class="wrap">
+    <h2>Questions fréquentes</h2>
+    <p class="intro"></p>
+    <details><summary>Métrix est-il vraiment gratuit ?</summary><p>Oui : téléchargement libre, sans inscription, sans publicité et sans limite d'utilisation.</p></details>
+    <details><summary>Mes plans sont-ils envoyés sur internet ?</summary><p>Non. Plans, métrés et maquettes sont lus et enregistrés sur votre ordinateur uniquement. Internet ne sert qu'à vérifier s'il existe une nouvelle version.</p></details>
+    <details><summary>Faut-il une connexion internet ?</summary><p>Non, Métrix fonctionne hors ligne. Sur iPhone et iPad, la version web reste disponible hors ligne une fois ajoutée à l'écran d'accueil.</p></details>
+    <details><summary>Comment recevoir les nouvelles versions ?</summary><p>Automatiquement : Métrix vérifie au lancement s'il existe une mise à jour et l'installe tout seul. Vous n'avez rien à retélécharger.</p></details>
+    <details><summary>Pourquoi mon ordinateur affiche-t-il un avertissement ?</summary><p>Mac et Windows avertissent pour toute application téléchargée hors de leurs boutiques officielles. Suivez les étapes d'installation ci-dessus : la confirmation n'est demandée qu'une fois.</p></details>
+    <details><summary>Quels fichiers puis-je ouvrir ?</summary><p>Plans PDF (plusieurs pages), images JPG et PNG, maquettes IFC (IFC2x3 et IFC4) et fichiers Revit .rvt avec le convertisseur DDC. Vos projets s'enregistrent dans un fichier .json que vous pouvez rouvrir ou partager.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="brand"><img src="img/logo.svg" alt="">Métrix</span>
+    <span>Logiciel de métré gratuit · version 3.16</span>
+    <span>Site hébergé par GitHub Pages (GitHub, Inc.) · aucun cookie, aucun suivi</span>
+  </div>
+</footer>
+
+<script>
+  // met en avant le téléchargement correspondant à l'appareil du visiteur
+  (function () {
+    var ua = navigator.userAgent, os = /iPhone|iPad|Android/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'mobile' : /Mac/.test(ua) ? 'mac' : /Windows/.test(ua) ? 'win' : '';
+    var c = os && document.querySelector('.dl .card[data-os="' + os + '"]');
+    if (c) { c.classList.add('mine'); c.parentNode.insertBefore(c, c.parentNode.firstChild); }
+  })();
+</script>
+</body>
+</html>
